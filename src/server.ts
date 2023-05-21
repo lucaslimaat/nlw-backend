@@ -15,16 +15,20 @@ app.register(multipart)
 
 app.register(require('@fastify/static'), {
   root: resolve(__dirname, '../uploads'),
-  prefix: 'uploads',
+  prefix: '/uploads',
 })
 
-app.register(cors, { origin: true })
+app.register(cors, {
+  origin: true,
+})
 
-app.register(jwt, { secret: 'spacetime' })
+app.register(jwt, {
+  secret: 'spacetime',
+})
 
-app.register(memoriesRoutes)
 app.register(authRoutes)
 app.register(uploadRoutes)
+app.register(memoriesRoutes)
 
 app
   .listen({
@@ -32,5 +36,5 @@ app
     host: '0.0.0.0',
   })
   .then(() => {
-    console.log('HTTP server running on http://localhost:3333')
+    console.log('🚀 HTTP server running on port http://localhost:3333')
   })
